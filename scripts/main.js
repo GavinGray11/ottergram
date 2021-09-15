@@ -73,10 +73,48 @@ function addKeyPressHandler() {
   });
 }
 
+
+var thumbnailArray = getThumbnailsArray();
+var i = 0;
+
+function next() {
+  i += 3;
+  i = i % thumbnailArray.length;
+  return thumbnailArray[i];
+}
+
+function prev() {
+  if (i === 0) {
+    i = thumbnailArray.length;
+  }
+  i = i - 1;
+  return thumbnailArray[i];
+}
+
+
+document.getElementById('next-button').addEventListener(
+  'click',
+  function (event) {
+    event.preventDefault();
+    setDetailsFromThumb(next());
+  }
+);
+
+document.getElementById('prev-button').addEventListener(
+  'click',
+  function (event) {
+    event.preventDefault();
+    setDetailsFromThumb(prev());
+  }
+);
+
+
+
 function initializeEvents() {
   'use strict';
   var thumbnails = getThumbnailsArray();
   thumbnails.forEach(addThumbClickHandler);
+
   addKeyPressHandler();
 }
 
